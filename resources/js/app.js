@@ -19,22 +19,14 @@ window.Vue = require("vue").default;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component(
-    "example-component",
-    require("./components/ExampleComponent.vue").default
-);
-
 import ProdukComponent from "./components/ProdukComponent.vue";
 Vue.component("produk", ProdukComponent);
-
-import InputFormComponent from "./components/InputFormComponent.vue";
-Vue.component("input-form", InputFormComponent);
 
 import DaftarProdukComponent from "./components/DaftarProdukComponent.vue";
 Vue.component("daftar-produk", DaftarProdukComponent);
 
-import ButtonComponent from "./components/ButtonComponent.vue";
-Vue.component("button", ButtonComponent);
+import KeranjangBelanjaComponent from "./components/KeranjangBelanjaComponent.vue";
+Vue.component("keranjang-belanja", KeranjangBelanjaComponent);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

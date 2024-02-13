@@ -1,30 +1,27 @@
 <template>
     <div class="row">
         <div class="col">
-            <h1>Semua Produk</h1>
+            <h1>Keranjang Belanja</h1>
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Description</th>
-                        <th>Stock</th>
+                        <th>Quantity</th>
                         <th>Price</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(p, index) in daftarproduk" :key="index">
-                        <td>{{ p.name }}</td>
-                        <td>{{ p.description }}</td>
-                        <td>{{ p.stock }}</td>
-                        <td>{{ p.price }}</td>
+                    <tr v-for="(k, index) in keranjangbelanja" :key="index">
+                        <td>{{ k.name }}</td>
+                        <td>{{ k.quantity }}</td>
+                        <td>{{ k.price }}</td>
                         <td class="text-center">
                             <button
-                                @click="addToChart(index)"
-                                class="btn btn-primary"
-                                v-if="p.stock > 0"
+                                @click="deleteProdukKeranjang(index)"
+                                class="btn btn-danger"
                             >
-                                Add To Chart
+                                Delete
                             </button>
                         </td>
                     </tr>
@@ -36,16 +33,15 @@
 
 <script>
 export default {
-    emits: ["emit-addtocart"],
-    props: ["daftarproduk"],
+    emits: ["emit-deleteProdukKeranjang"],
+    props: ["keranjangbelanja"],
     data() {
         return {};
     },
     methods: {
-        addToChart(index) {
-            this.$emit("emit-addtocart", index);
+        deleteProdukKeranjang(index) {
+            this.$emit("emit-deleteProdukKeranjang", index);
         },
     },
-    mounted() {},
 };
 </script>
