@@ -5302,7 +5302,11 @@ var render = function render() {
   }, 0).toLocaleString("id-ID", {
     style: "currency",
     currency: "IDR"
-  }).replace(",00", "")) + "\n                    ")])])])]), _vm._v(" "), _c("button", {
+  }).replace(",00", "")) + "\n                    ")]), _vm._v(" "), _c("td", {
+    attrs: {
+      colspan: "2"
+    }
+  })])])]), _vm._v(" "), _c("button", {
     staticClass: "btn btn-success",
     on: {
       click: _vm.checkout
@@ -5335,7 +5339,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "container"
+    staticClass: "container shadow-lg p-3 mt-5"
   }, [_c("daftar-produk", {
     attrs: {
       daftarproduk: _vm.produk

@@ -51,6 +51,7 @@
                                     .replace(",00", "")
                             }}
                         </td>
+                        <td colspan="2"></td>
                     </tr>
                 </tfoot>
             </table>

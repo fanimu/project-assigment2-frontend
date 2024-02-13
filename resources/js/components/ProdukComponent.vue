@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container shadow-lg p-3 mt-5">
         <daftar-produk :daftarproduk="produk" @emit-addtocart="addToChart" />
         <keranjang-belanja
             :keranjangbelanja="produkKeranjang"
