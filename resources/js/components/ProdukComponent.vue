@@ -28,7 +28,7 @@ export default {
                 {
                     name: "Bakmi mewah",
                     description: "Kalau anak kosan jangan macam2 deh",
-                    stock: 5,
+                    stock: 80,
                     price: 10000,
                 },
             ],
@@ -58,6 +58,15 @@ export default {
             }
         },
         deleteProdukKeranjang(index) {
+            const deletedProduct = this.produkKeranjang[index];
+            const originalProductIndex = this.produk.findIndex(
+                (product) => product.name === deletedProduct.name
+            );
+
+            if (originalProductIndex !== -1) {
+                this.produk[originalProductIndex].stock +=
+                    deletedProduct.quantity;
+            }
             this.produkKeranjang.splice(index, 1);
         },
     },

@@ -17,7 +17,16 @@
                         <td>{{ p.name }}</td>
                         <td>{{ p.description }}</td>
                         <td>{{ p.stock }}</td>
-                        <td>{{ p.price }}</td>
+                        <td>
+                            {{
+                                p.price
+                                    .toLocaleString("id-ID", {
+                                        style: "currency",
+                                        currency: "IDR",
+                                    })
+                                    .replace(",00", "")
+                            }}
+                        </td>
                         <td class="text-center">
                             <button
                                 @click="addToChart(index)"

@@ -5106,11 +5106,26 @@ __webpack_require__.r(__webpack_exports__);
   emits: ["emit-deleteProdukKeranjang"],
   props: ["keranjangbelanja"],
   data: function data() {
-    return {};
+    return {
+      totalHarga: 0
+    };
   },
   methods: {
     deleteProdukKeranjang: function deleteProdukKeranjang(index) {
       this.$emit("emit-deleteProdukKeranjang", index);
+    },
+    checkout: function checkout() {
+      this.totalHarga = this.keranjangbelanja.reduce(function (total, k) {
+        return total + k.price;
+      }, 0);
+      if (this.keranjangbelanja.length > 0) {
+        alert("Total pembelian: " + this.totalHarga.toLocaleString("id-ID", {
+          style: "currency",
+          currency: "IDR"
+        }).replace(",00", ""));
+      } else {
+        alert("Keranjang belanja kosong.");
+      }
     }
   }
 });
@@ -5150,7 +5165,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       }, {
         name: "Bakmi mewah",
         description: "Kalau anak kosan jangan macam2 deh",
-        stock: 5,
+        stock: 80,
         price: 10000
       }],
       produkKeranjang: []
@@ -5175,6 +5190,13 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       }
     },
     deleteProdukKeranjang: function deleteProdukKeranjang(index) {
+      var deletedProduct = this.produkKeranjang[index];
+      var originalProductIndex = this.produk.findIndex(function (product) {
+        return product.name === deletedProduct.name;
+      });
+      if (originalProductIndex !== -1) {
+        this.produk[originalProductIndex].stock += deletedProduct.quantity;
+      }
       this.produkKeranjang.splice(index, 1);
     }
   },
@@ -5207,7 +5229,10 @@ var render = function render() {
   }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.daftarproduk, function (p, index) {
     return _c("tr", {
       key: index
-    }, [_c("td", [_vm._v(_vm._s(p.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(p.description))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(p.stock))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(p.price))]), _vm._v(" "), _c("td", {
+    }, [_c("td", [_vm._v(_vm._s(p.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(p.description))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(p.stock))]), _vm._v(" "), _c("td", [_vm._v("\n                        " + _vm._s(p.price.toLocaleString("id-ID", {
+      style: "currency",
+      currency: "IDR"
+    }).replace(",00", "")) + "\n                    ")]), _vm._v(" "), _c("td", {
       staticClass: "text-center"
     }, [p.stock > 0 ? _c("button", {
       staticClass: "btn btn-primary",
@@ -5253,7 +5278,10 @@ var render = function render() {
   }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.keranjangbelanja, function (k, index) {
     return _c("tr", {
       key: index
-    }, [_c("td", [_vm._v(_vm._s(k.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(k.quantity))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(k.price))]), _vm._v(" "), _c("td", {
+    }, [_c("td", [_vm._v(_vm._s(k.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(k.quantity))]), _vm._v(" "), _c("td", [_vm._v("\n                        " + _vm._s(k.price.toLocaleString("id-ID", {
+      style: "currency",
+      currency: "IDR"
+    }).replace(",00", "")) + "\n                    ")]), _vm._v(" "), _c("td", {
       staticClass: "text-center"
     }, [_c("button", {
       staticClass: "btn btn-danger",
@@ -5263,7 +5291,23 @@ var render = function render() {
         }
       }
     }, [_vm._v("\n                            Delete\n                        ")])])]);
-  }), 0)])])]);
+  }), 0), _vm._v(" "), _c("tfoot", {
+    staticClass: "fw-bold"
+  }, [_c("tr", [_c("td", {
+    attrs: {
+      colspan: "2"
+    }
+  }, [_vm._v("Total")]), _vm._v(" "), _c("td", [_vm._v("\n                        " + _vm._s(_vm.keranjangbelanja.reduce(function (total, k) {
+    return total + k.price;
+  }, 0).toLocaleString("id-ID", {
+    style: "currency",
+    currency: "IDR"
+  }).replace(",00", "")) + "\n                    ")])])])]), _vm._v(" "), _c("button", {
+    staticClass: "btn btn-success",
+    on: {
+      click: _vm.checkout
+    }
+  }, [_vm._v("Checkout")])])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
